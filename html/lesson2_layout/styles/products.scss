@@ -1,0 +1,45 @@
+.products {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.product {
+	display: flex;
+	flex-direction: column;
+	flex-basis: 50%;
+	background-color: #fff;
+	border: 0.5px solid #f7f7f7;
+
+	&__img img {
+		width: 100%;
+		padding: 50px 15px;
+	}
+
+	&__info {
+		text-align: center;
+		padding-bottom: 25px;
+	}
+
+	&__title {
+		margin: 0;
+		white-space: normal;
+	}
+
+	&__price {
+		margin: 0;
+		font-size: 0.875em;
+		color: rgb(102, 102, 102);
+	}
+}
+
+@media screen and (min-width: 600px) {
+	.product {
+		flex-basis: 25%;
+	}
+}
+
+@media screen and (min-width: 900px) {
+	.product {
+		flex-basis: 20%;
+	}
+}
