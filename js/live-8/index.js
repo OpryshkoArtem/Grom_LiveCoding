@@ -40,3 +40,14 @@ console.log(
     return false;
   }),
 );
+
+//  ** MAP
+const mapArrayElements = (arr, callback) => {
+  // put you code here
+  const res = [];
+  for (let index = 0; index < arr.length; index += 1) {
+    const elem = arr[index];
+    res.push(callback(elem, index, arr));
+  }
+  return res;
+};
