@@ -37,54 +37,34 @@ const renderTasks = tasksList => {
 
 renderTasks(tasks);
 
-const createBtn = document.querySelector('.create-task-btn');
-const inputElem = document.querySelector('.task-input');
+function updateTaskHandler(event) {
+  if (!event.target.classList.contains('list__item-checkbox')) {
+    return;
+  }
+
+  const task = tasks.find(el => el.id === Number(event.target.dataset.id));
+  task.done = +event.target.checked;
+  // task.done = !task.done;
+
+  renderTasks(tasks);
+}
+
+const res = listElem.addEventListener('click', updateTaskHandler);
 
 function createTaskHandler() {
-  const task = {
-    text: inputElem.value,
-    done: false,
-  };
-  if (inputElem.value !== '') {
-    tasks.push(task);
-    inputElem.value = '';
+  const inputElem = document.querySelector('.task-input');
+  const str = inputElem.value;
 
-    renderTasks(tasks);
+  if (str === '') {
+    return;
   }
+
+  inputElem.value = '';
+
+  tasks.push({ text: str, done: false, id: tasks.length + 1 });
+
+  renderTasks(tasks);
 }
-createBtn.addEventListener('click', createTaskHandler);
 
-// EVENT
-// 1. add event to the element   +++
-// 2. create event handlers
-
-// list
-// click
-
-// input: event
-// output: undef
-
-// alg
-// find task by Id
-// update task
-// re-render
-listElem.addEventListener(
-  'click',
-  function (event) {
-    if (event.target.tagName === 'INPUT') {
-      event.target.closest('.list__item').classList.toggle('list__item_done');
-    }
-  },
-  false,
-);
-
-// input: string, func(callback)
-// output: undefined
-
-listElem.addEventListener('click', updateTaskHandler);
-
-// web flow
-// 1. get data
-// 2. render
-// 3. uptade data, don't update DOM (!!!!!)
-// 4. re-render
+const createBtnElem = document.querySelector('.create-task-btn');
+createBtnElem.addEventListener('click', createTaskHandler);
